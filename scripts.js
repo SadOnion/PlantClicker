@@ -13,7 +13,7 @@ function start(){
         alert(xmlhttp.responseText);
   }
 };
-xmlhttp.open("GET","PlantClicker/plantsData.json",true);
+xmlhttp.open("GET","plantsData.json",true);
 xmlhttp.send();
     
 
