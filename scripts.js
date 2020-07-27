@@ -22,5 +22,5 @@ function start(){
 function changePlant(){
         $("#plant").html(plant2+pot);
         
-       alert(data);
+       alert(data.grow1);
 }
