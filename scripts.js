@@ -11,6 +11,7 @@ function start(){
     xmlhttp.onreadystatechange = function(){
         if(xmlhttp.status == 200 && xmlhttp.status == 0){
         alert(xmlhttp.responseText);
+        data = JSON.parse(xmlhttp.responseText);
   }
 };
 xmlhttp.open("GET","plantsData.json",true);
@@ -20,5 +21,6 @@ xmlhttp.send();
 }
 function changePlant(){
         $("#plant").html(plant2+pot);
+        
        alert(data);
 }
