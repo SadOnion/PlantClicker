@@ -1,6 +1,7 @@
 body{
     background-color: #333333;
     color: #eeeeee;
+    font-size: xx-large;
 }
 .normal:hover{
     cursor: default;
