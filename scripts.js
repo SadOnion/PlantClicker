@@ -10,9 +10,10 @@ function start(){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function(){
         if(xmlhttp.status == 200 && xmlhttp.status == 0){
-        alert(xmlhttp.responseText);
+        
         data = JSON.parse(xmlhttp.responseText);
   }
+  alert(xmlhttp.responseText);
 };
 xmlhttp.open("GET","plantsData.json",true);
 xmlhttp.send();
