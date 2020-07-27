@@ -13,11 +13,11 @@ function start(){
         
         data = JSON.parse(xmlhttp.responseText);
   }
-  alert(xmlhttp.responseText);
+  
 };
 xmlhttp.open("GET","plantsData.json",true);
 xmlhttp.send();
-    
+alert(xmlhttp.responseText);
 
 }
 function changePlant(){
