@@ -1,0 +1,14 @@
+body{
+    background-color: #333333;
+    color: #eeeeee;
+}
+.normal:hover{
+    cursor: default;
+}
+a{
+    cursor: pointer;
+}
+#plantBox{
+    padding: 100px;
+    margin:auto;
+}
