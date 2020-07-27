@@ -3,7 +3,8 @@ window.onload = start;
 var plant1 = "<a onClick='tick()'> ___________</a>";
 var pot = "\n[___________]\n |         |\n |         |\n |         |\n |_________|";
 var data = null;
-var tickNum=0;
+var maturityLevel=0;
+var maturity=0;
 function start(){
     $("#plant").html(plant1+pot);
     var xmlhttp = new XMLHttpRequest();
@@ -14,10 +15,15 @@ function start(){
     xmlhttp.send();
 }
 function changePlant(growNum){
-        $("#plant").html(data.grow[growNum]+pot);
+        $("#plant").html(data.grow[maturityLevel]+pot);
 }
 function tick(){
-    changePlant(tickNum);
-    tickNum++;
-    setTimeout(tick, 5000);
+   
+    maturity++;
+    var level = maturity / 20;
+    if(level > maturityLevel){
+        maturityLevel = level;
+        changePlant(maturityLevel);
+    }
+    setTimeout(tick, Math.random()*2*1000);
 }
