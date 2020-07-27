@@ -20,7 +20,7 @@ function changePlant(growNum){
 function tick(){
    
     maturity++;
-    var level = Mathf.floor(maturity / 20);
+    var level = Math.floor(maturity / 20);
     alert(level);
     if(level > maturityLevel){
         maturityLevel = level;
