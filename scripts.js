@@ -1,6 +1,6 @@
 window.onload = start;
 
-var plant1 = "<a onClick='changePlant()'> ___________</a>";
+var plant1 = "<a onClick='tick()'> ___________</a>";
 var pot = "\n[___________]\n |         |\n |         |\n |         |\n |_________|";
 var data = null;
 var tickNum=0;
@@ -12,16 +12,12 @@ function start(){
     };
     xmlhttp.open("GET","plantsData.json",true);
     xmlhttp.send();
-
-
 }
-function changePlant(){
-        $("#plant").html(data.grow1+pot);
-        
-       alert(data.grow1);
+function changePlant(growNum){
+        $("#plant").html(data.grow[growNum]+pot);
 }
 function tick(){
-    $("#plant").html(data.grow[tickNum]+pot);
+    changePlant(tickNum);
     tickNum++;
     setTimeout(tick, 5000);
 }
