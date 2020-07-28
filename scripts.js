@@ -40,6 +40,8 @@ function harvest(){
     window.localStorage.setItem("maturityLevel", 0);
     window.localStorage.setItem("maturity", 0);
     window.localStorage.setItem("planted", false);
+    maturity=0;
+    maturityLevel=-1;
     planted = false;
 }
 function tick(){
@@ -53,7 +55,7 @@ function tick(){
         return;
     }
     updateStats();
-    setTimeout(tick, Math.random()*10*1000);
+    setTimeout(tick, Math.random()*2*1000);
 }
 function updateStats(){
     $("#stats").html("Maturity: "+maturity+" %");
