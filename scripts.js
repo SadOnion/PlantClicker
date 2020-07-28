@@ -8,6 +8,7 @@ var maturity=0;
 var planted = false;
 function start(){
     $("#plant").html(plant1+pot);
+    tick();
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function(){
         data = JSON.parse(xmlhttp.responseText);
@@ -16,13 +17,12 @@ function start(){
         if(planted){
             changePlant(maturityLevel);
             updateStats();
-            tick();
+            ticking = true;
             console.log("Loaded plant from save start ticking");
         }
     };
     xmlhttp.open("GET","plantsData.json",true);
     xmlhttp.send();
-
 
 }
 function autosave(){
@@ -38,7 +38,6 @@ function plant(){
     $("#plant").html(data.grow[0]+pot);
     planted = true;
     window.localStorage.setItem("planted", planted);
-    tick();
 }
 function changePlant(growNum){
     if(growNum == data.grow.length){
@@ -61,18 +60,20 @@ function harvest(){
     save();
 }
 function tick(){
-    console.log("tick: m:"+maturity);
-    maturity++;
-    updateStats();
-    var level = Math.floor(maturity / (100/data.grow.length-1));
-    if(level > maturityLevel && level < data.grow.length){
-        maturityLevel = level;
-        changePlant(maturityLevel);
+    if(planted){
+        maturity++;
+        updateStats();
+        var level = Math.floor(maturity / (100/data.grow.length-1));
+        if(level > maturityLevel && level < data.grow.length){
+            maturityLevel = level;
+            changePlant(maturityLevel);
+        }
+        if(level >= data.grow.length){
+            return;
+        }
+        setTimeout(tick, Math.random()*2*1000);
     }
-    if(level >= data.grow.length){
-        return;
-    }
-    setTimeout(tick, Math.random()*2*1000);
+    
 }
 function updateStats(){
     $("#stats").html("Maturity: "+clamp(0,100,maturity)+" %");
