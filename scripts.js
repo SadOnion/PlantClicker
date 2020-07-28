@@ -1,7 +1,7 @@
 window.onload = start;
 
-var plant1 = "<a onClick='plant()'> ___________</a>";
-var pot = "\n[___________]\n |         |\n |         |\n |         |\n |_________|";
+const plant1 = "<a onClick='plant()'> ___________</a>";
+const pot = "\n[___________]\n |         |\n |         |\n |         |\n |_________|";
 var data = null;
 var maturityLevel=-1;
 var maturity=0;
@@ -17,6 +17,7 @@ function start(){
             changePlant(maturityLevel);
             updateStats();
             tick();
+            console.log("Loaded plant from save start ticking");
         }
     };
     xmlhttp.open("GET","plantsData.json",true);
@@ -60,6 +61,7 @@ function harvest(){
     save();
 }
 function tick(){
+    console.log("tick: m:"+maturity);
     maturity++;
     updateStats();
     var level = Math.floor(maturity / (100/data.grow.length));
