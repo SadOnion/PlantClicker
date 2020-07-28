@@ -1,7 +1,6 @@
 window.onload = start;
 
 const plant1 = "<a onClick='plant()'> ___________</a>";
-const pot = "\n[___________]\n |         |\n |         |\n |         |\n |_________|";
 var data = null;
 var maturityLevel=0;
 var maturity=0;
@@ -10,7 +9,7 @@ var timeToNextTick =0;
 const maxTimeToTick = 1;
 
 function start(){
-    $("#plant").html(plant1+pot);
+    $("#plant").html(plant1);
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function(){
         data = JSON.parse(xmlhttp.responseText);
@@ -42,7 +41,7 @@ function load(){
     maturityLevel = parseInt(window.localStorage.getItem("maturityLevel"));
 }
 function plant(){
-    $("#plant").html(data.grow[0]+pot);
+    $("#plant").html(data.grow[0]);
     planted = true;
     window.localStorage.setItem("planted", planted);
 }
@@ -52,10 +51,10 @@ function changePlant(growNum){
     "\n MatLvl:"+maturityLevel+
     "\n mathf:"+Math.floor(maturity / (100/data.grow.length-1)));
     if(growNum == data.grow.length-1){
-        $("#plant").html("<a onClick='harvest()'>"+data.grow[maturityLevel]+pot+"</a>");
+        $("#plant").html("<a onClick='harvest()'>"+data.grow[maturityLevel]+"</a>");
     }else{
 
-        $("#plant").html(data.grow[maturityLevel]+pot);
+        $("#plant").html(data.grow[maturityLevel]);
     }
 }
 function save(){
@@ -64,7 +63,7 @@ function save(){
     window.localStorage.setItem("planted", planted);
 }
 function harvest(){
-    $("#plant").html(plant1+pot);
+    $("#plant").html(plant1);
     maturity=0;
     maturityLevel=0;
     planted = false;
