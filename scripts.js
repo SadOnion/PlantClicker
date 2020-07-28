@@ -6,6 +6,8 @@ var data = null;
 var maturityLevel=0;
 var maturity=0;
 var planted = false;
+var timeToNextTick =0;
+const maxTimeToTick = 2;
 function start(){
     $("#plant").html(plant1+pot);
     var xmlhttp = new XMLHttpRequest();
@@ -16,12 +18,13 @@ function start(){
         if(planted){
             changePlant(maturityLevel);
             updateStats();
+            timeToNextTick = Math.random()*maxTimeToTick;
             console.log("Loaded plant from save start ticking");
         }
     };
     xmlhttp.open("GET","plantsData.json",true);
     xmlhttp.send();
-    tick();
+    nextTimeStep();
 
 }
 function showLoadedData(){
@@ -63,7 +66,6 @@ function harvest(){
     save();
 }
 function tick(){
-    if(planted){
         console.log("tick");
         mature();
         updateStats();
@@ -75,9 +77,19 @@ function tick(){
         if(level >= data.grow.length && maturity >= 100){
             return;
         }
-        setTimeout(tick, Math.random()*2*1000);
-    }
     
+    
+    
+}
+function nextTimeStep(){
+    if(planted){
+        timeToNextTick--;
+        if(timeToNextTick <=0){
+            tick();
+            timeToNextTick = Math.random()*maxTimeToTick;
+        }
+    }
+    setTimeout(nextTimeStep, 1000);
 }
 function mature(){
     maturity++;
