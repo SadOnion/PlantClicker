@@ -52,6 +52,7 @@ function tick(){
     if(maturity >= 100){
         return;
     }
+    updateStats();
     setTimeout(tick, Math.random()*10*1000);
 }
 function updateStats(){
