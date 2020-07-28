@@ -7,7 +7,7 @@ var maturityLevel=0;
 var maturity=0;
 var planted = false;
 var timeToNextTick =0;
-const maxTimeToTick = 2;
+const maxTimeToTick = 1;
 function start(){
     $("#plant").html(plant1+pot);
     var xmlhttp = new XMLHttpRequest();
@@ -49,7 +49,7 @@ function changePlant(growNum){
     console.log("mat:"+maturity+
     "\n MatLvl:"+maturityLevel+
     "\n mathf:"+Math.floor(maturity / (100/data.grow.length-1)));
-    if(growNum == data.grow.length){
+    if(growNum == data.grow.length-1){
         $("#plant").html("<a onClick='harvest()'>"+data.grow[maturityLevel]+pot+"</a>");
     }else{
 
