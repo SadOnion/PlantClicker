@@ -39,6 +39,7 @@ function plant(){
     window.localStorage.setItem("planted", planted);
 }
 function changePlant(growNum){
+    console.log("changing plant to "+growNum);
     if(growNum == data.grow.length){
         $("#plant").html("<a onClick='harvest()'>"+data.grow[maturityLevel]+pot+"</a>");
     }else{
@@ -60,6 +61,7 @@ function harvest(){
 }
 function tick(){
     if(planted){
+        console.log("tick");
         mature();
         updateStats();
         var level = Math.floor(maturity / (100/data.grow.length-1));
