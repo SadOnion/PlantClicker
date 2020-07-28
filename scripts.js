@@ -69,7 +69,7 @@ function tick(){
         maturityLevel = level;
         changePlant(maturityLevel);
     }
-    if(level = data.grow.length){
+    if(level >= data.grow.length){
         return;
     }
     setTimeout(tick, Math.random()*2*1000);
