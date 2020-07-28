@@ -46,6 +46,9 @@ function plant(){
 }
 function changePlant(growNum){
     console.log("changing plant to "+growNum);
+    console.log("mat:"+maturity+
+    "\n MatLvl:"+maturityLevel+
+    "\n mathf:"+Math.floor(maturity / (100/data.grow.length-1)));
     if(growNum == data.grow.length){
         $("#plant").html("<a onClick='harvest()'>"+data.grow[maturityLevel]+pot+"</a>");
     }else{
