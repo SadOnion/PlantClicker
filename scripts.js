@@ -75,5 +75,8 @@ function tick(){
     setTimeout(tick, Math.random()*2*1000);
 }
 function updateStats(){
-    $("#stats").html("Maturity: "+maturity+" %");
+    $("#stats").html("Maturity: "+clamp(0,100,maturity)+" %");
+}
+function clamp(min,max,value){
+    return Math.max(min,Math.min(max,value))
 }
