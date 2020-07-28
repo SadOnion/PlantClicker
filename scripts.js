@@ -72,7 +72,7 @@ function tick(){
         console.log("tick");
         mature();
         updateStats();
-        var level = Math.floor(maturity / (100/data.grow.length-1));
+        var level = Math.floor(maturity / (100/(data.grow.length-1)));
         if(level > maturityLevel && level < data.grow.length){
             maturityLevel = level;
             changePlant(maturityLevel);
