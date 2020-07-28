@@ -64,12 +64,12 @@ function tick(){
     console.log("tick: m:"+maturity);
     maturity++;
     updateStats();
-    var level = Math.floor(maturity / (100/data.grow.length));
-    if(level > maturityLevel && level < data.grow.length){
+    var level = Math.floor(maturity / (100/data.grow.length-1))+1;
+    if(level > maturityLevel && level <= data.grow.length){
         maturityLevel = level;
         changePlant(maturityLevel);
     }
-    if(level >= data.grow.length){
+    if(level > data.grow.length){
         return;
     }
     setTimeout(tick, Math.random()*2*1000);
