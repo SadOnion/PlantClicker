@@ -11,13 +11,24 @@ function start(){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function(){
         data = JSON.parse(xmlhttp.responseText);
+        planted =  (window.localStorage.getItem("planted") == 'true');
+        maturity = parseInt(window.localStorage.getItem("maturity"));
+        maturityLevel = parseInt(window.localStorage.getItem("maturityLevel"));
+
+        if(planted){
+            changePlant(maturityLevel);
+            updateStats();
+        }
     };
     xmlhttp.open("GET","plantsData.json",true);
     xmlhttp.send();
+
+
 }
 function autosave(){
     window.localStorage.setItem("maturityLevel", maturityLevel);
     window.localStorage.setItem("maturity", maturity);
+    window.localStorage.setItem("planted", planted);
     setTimeout(autosave, 60*1000);
 }
 function plant(){
@@ -46,15 +57,15 @@ function harvest(){
 }
 function tick(){
     maturity++;
+    updateStats();
     var level = Math.floor(maturity / (100/data.grow.length));
-    if(level > maturityLevel){
+    if(level > maturityLevel && level < data.grow.length){
         maturityLevel = level;
         changePlant(maturityLevel);
     }
-    if(maturity >= 100){
+    if(level = data.grow.length){
         return;
     }
-    updateStats();
     setTimeout(tick, Math.random()*2*1000);
 }
 function updateStats(){
