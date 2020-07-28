@@ -24,6 +24,9 @@ function start(){
     tick();
 
 }
+function showLoadedData(){
+    console.log("Mat:"+maturity+"\nMatLvl:"+maturityLevel+"\nPlanted:"+planted);
+}
 function autosave(){
     save();
     setTimeout(autosave, 60*1000);
