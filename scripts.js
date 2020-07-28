@@ -8,21 +8,20 @@ var maturity=0;
 var planted = false;
 function start(){
     $("#plant").html(plant1+pot);
-    tick();
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function(){
         data = JSON.parse(xmlhttp.responseText);
         load();
-
+        
         if(planted){
             changePlant(maturityLevel);
             updateStats();
-            ticking = true;
             console.log("Loaded plant from save start ticking");
         }
     };
     xmlhttp.open("GET","plantsData.json",true);
     xmlhttp.send();
+    tick();
 
 }
 function autosave(){
@@ -61,23 +60,34 @@ function harvest(){
 }
 function tick(){
     if(planted){
-        maturity++;
+        mature();
         updateStats();
         var level = Math.floor(maturity / (100/data.grow.length-1));
         if(level > maturityLevel && level < data.grow.length){
             maturityLevel = level;
             changePlant(maturityLevel);
         }
-        if(level >= data.grow.length){
+        if(level >= data.grow.length && maturity >= 100){
             return;
         }
         setTimeout(tick, Math.random()*2*1000);
     }
     
 }
+function mature(){
+    maturity++;
+    if(maturity >= 100){
+        maturity = 100;
+    }
+}
 function updateStats(){
     $("#stats").html("Maturity: "+clamp(0,100,maturity)+" %");
 }
 function clamp(min,max,value){
     return Math.max(min,Math.min(max,value))
+}
+function reset(){
+    window.localStorage.setItem("maturityLevel", 0);
+    window.localStorage.setItem("maturity", 0);
+    window.localStorage.setItem("planted", false);
 }
