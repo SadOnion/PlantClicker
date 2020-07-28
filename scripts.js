@@ -8,11 +8,7 @@ var maturity=0;
 var planted = false;
 var timeToNextTick =0;
 const maxTimeToTick = 1;
-const myNotification = window.createNotification({
-    // options here
-    title: 'Title',
-    message: 'Notification Message' 
-});
+
 function start(){
     $("#plant").html(plant1+pot);
     var xmlhttp = new XMLHttpRequest();
@@ -38,7 +34,7 @@ function showLoadedData(){
 function autosave(){
     save();
     setTimeout(autosave, 10*1000);
-    myNotification();
+    console.log("autosaved");
 }
 function load(){
     planted =  (window.localStorage.getItem("planted") == 'true');
