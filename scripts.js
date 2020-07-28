@@ -11,13 +11,12 @@ function start(){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function(){
         data = JSON.parse(xmlhttp.responseText);
-        planted =  (window.localStorage.getItem("planted") == 'true');
-        maturity = parseInt(window.localStorage.getItem("maturity"));
-        maturityLevel = parseInt(window.localStorage.getItem("maturityLevel"));
+        load();
 
         if(planted){
             changePlant(maturityLevel);
             updateStats();
+            tick();
         }
     };
     xmlhttp.open("GET","plantsData.json",true);
@@ -26,10 +25,13 @@ function start(){
 
 }
 function autosave(){
-    window.localStorage.setItem("maturityLevel", maturityLevel);
-    window.localStorage.setItem("maturity", maturity);
-    window.localStorage.setItem("planted", planted);
+    save();
     setTimeout(autosave, 60*1000);
+}
+function load(){
+    planted =  (window.localStorage.getItem("planted") == 'true');
+    maturity = parseInt(window.localStorage.getItem("maturity"));
+    maturityLevel = parseInt(window.localStorage.getItem("maturityLevel"));
 }
 function plant(){
     $("#plant").html(data.grow[0]+pot);
@@ -45,15 +47,17 @@ function changePlant(growNum){
         $("#plant").html(data.grow[maturityLevel]+pot);
     }
 }
-
+function save(){
+    window.localStorage.setItem("maturityLevel", maturityLevel);
+    window.localStorage.setItem("maturity", maturity);
+    window.localStorage.setItem("planted", planted);
+}
 function harvest(){
     $("#plant").html(plant1+pot);
-    window.localStorage.setItem("maturityLevel", 0);
-    window.localStorage.setItem("maturity", 0);
-    window.localStorage.setItem("planted", false);
     maturity=0;
     maturityLevel=-1;
     planted = false;
+    save();
 }
 function tick(){
     maturity++;
