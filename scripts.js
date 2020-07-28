@@ -54,3 +54,6 @@ function tick(){
     }
     setTimeout(tick, Math.random()*10*1000);
 }
+function updateStats(){
+    $("#stats").html("Maturity: "+maturity+" %");
+}
