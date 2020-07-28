@@ -8,6 +8,11 @@ var maturity=0;
 var planted = false;
 var timeToNextTick =0;
 const maxTimeToTick = 1;
+const myNotification = window.createNotification({
+    // options here
+    title: 'Title',
+    message: 'Notification Message' 
+});
 function start(){
     $("#plant").html(plant1+pot);
     var xmlhttp = new XMLHttpRequest();
@@ -25,14 +30,15 @@ function start(){
     xmlhttp.open("GET","plantsData.json",true);
     xmlhttp.send();
     nextTimeStep();
-
+    setTimeout(autosave, 10*1000);
 }
 function showLoadedData(){
     console.log("Mat:"+maturity+"\nMatLvl:"+maturityLevel+"\nPlanted:"+planted);
 }
 function autosave(){
     save();
-    setTimeout(autosave, 60*1000);
+    setTimeout(autosave, 10*1000);
+    myNotification();
 }
 function load(){
     planted =  (window.localStorage.getItem("planted") == 'true');
@@ -67,6 +73,7 @@ function harvest(){
     maturityLevel=0;
     planted = false;
     save();
+    updateStats();
 }
 function tick(){
         console.log("tick");
@@ -85,7 +92,7 @@ function tick(){
     
 }
 function nextTimeStep(){
-    if(planted){
+    if(planted && maturity < 100){
         timeToNextTick--;
         if(timeToNextTick <=0){
             tick();
