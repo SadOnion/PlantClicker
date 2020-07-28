@@ -92,7 +92,5 @@ function clamp(min,max,value){
     return Math.max(min,Math.min(max,value))
 }
 function reset(){
-    window.localStorage.setItem("maturityLevel", 0);
-    window.localStorage.setItem("maturity", 0);
-    window.localStorage.setItem("planted", false);
+    localStorage.clear();
 }
